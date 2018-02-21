@@ -33,11 +33,14 @@ all = all[~np.isnan(all).any(axis=1)]
 
 X_train = all[:,:12]
 Y_train = all[:,12]
-Y_train = Y_train.tolist()
+Y_train = Y_train.reshape((-1,))
 
 X_train, X_validation, Y_train, Y_validation = train_test_split(
-    features, labels, test_size=0.4, random_state=747)
+	X_train, Y_train, test_size=0.4, random_state=747)
 
-# clf = svm.SVC(kernel='linear', C=1)
-# clf.fit(X_train, Y_train)
-# clf.score(X_validation, Y_validation)
+clf = svm.SVC(kernel='linear', C=1.0)
+clf.fit(X_train, Y_train)
+
+scores = cross_val_score(clf, X_validation, Y_validation, cv=5)
+
+print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
