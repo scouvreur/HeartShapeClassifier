@@ -1,3 +1,14 @@
+'''
+|=========================================================|
+|                                                         |
+| This program implements a support vector machine (SVM)  |
+| classifier for healthy and pathological heart ventricle |
+| shapes based on a database from CREATIS @ INSA          |
+|                                                         |
+|=========================================================|
+'''
+print(__doc__)
+
 import numpy as np
 from scipy import io as spio
 from matplotlib import pyplot as plt
